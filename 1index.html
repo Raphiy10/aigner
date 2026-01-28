@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Scroll Würfel</title>
+<style>
+    body {
+        height: 300vh; /* Scroll-Länge */
+        margin: 0;
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .scene {
+        width: 200px;
+        height: 200px;
+        perspective: 600px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .cube {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+    }
+
+    .face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: rgba(0, 150, 255, 0.8);
+        border: 2px solid #fff;
+    }
+
+    .front  { transform: rotateY(0deg) translateZ(100px); }
+    .back   { transform: rotateY(180deg) translateZ(100px); }
+    .right  { transform: rotateY(90deg) translateZ(100px); }
+    .left   { transform: rotateY(-90deg) translateZ(100px); }
+    .top    { transform: rotateX(90deg) translateZ(100px); }
+    .bottom { transform: rotateX(-90deg) translateZ(100px); }
+</style>
+</head>
+<body>
+
+<div class="scene">
+    <div class="cube" id="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face right"></div>
+        <div class="face left"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+    </div>
+</div>
+
+<script>
+    const cube = document.getElementById("cube");
+
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        cube.style.transform = `
+            rotateX(${scrollY * 0.3}deg)
+            rotateY(${scrollY * 0.3}deg)
+        `;
+    });
+</script>
+
+</body>
+</html>
